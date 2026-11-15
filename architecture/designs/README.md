@@ -12,3 +12,4 @@ Governed by IEEE 1016-2009 Software Design Descriptions and the Unified Process 
 ## Catalog
 
 - [SDD-001: Quality Gates and Boundary Enforcement Infrastructure](0001_quality_gates_and_boundary_enforcement.md) - **Approved** (2026-11-15)
+- [SDD-002: Component Migration, Component Set Architecture, and Composition Roots](0002_component_migration_and_organization.md) - **In-Progress** (2026-11-15)
