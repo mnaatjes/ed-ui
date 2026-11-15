@@ -1,7 +1,5 @@
 """Unit tests for ed_ui_cli components and composition roots."""
 
-from rich.console import Console
-
 from ed_ui_cli.components import render_connection_pill, render_metric_grid
 from ed_ui_cli.factories.terminal_dashboard import (
     TerminalDashboardBinder,
@@ -9,6 +7,7 @@ from ed_ui_cli.factories.terminal_dashboard import (
     make_snapshot_views,
 )
 from ed_ui_cli.snapshots import SnapshotTarget
+from rich.console import Console
 
 
 def test_connection_pill():
@@ -52,5 +51,7 @@ def test_terminal_dashboard_composition_root():
 
 
 def test_make_snapshot_views():
-    views = make_snapshot_views(SnapshotTarget.CARGO, '{"Inventory": [{"Name": "gold", "Count": 10}]}')
+    views = make_snapshot_views(
+        SnapshotTarget.CARGO, '{"Inventory": [{"Name": "gold", "Count": 10}]}'
+    )
     assert len(views) > 0

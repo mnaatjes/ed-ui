@@ -78,7 +78,7 @@ class ThemeManager:
             self._apply_recursive(self._root, tokens)
 
     def _apply_recursive(self, widget: tk.Misc, tokens: ThemeTokens) -> None:
-        if isinstance(widget, (tk.Frame, tk.Label, tk.Tk, tk.Toplevel)):
+        if isinstance(widget, tk.Frame | tk.Label | tk.Tk | tk.Toplevel):
             try:
                 widget.configure(bg=tokens.bg)
             except tk.TclError:

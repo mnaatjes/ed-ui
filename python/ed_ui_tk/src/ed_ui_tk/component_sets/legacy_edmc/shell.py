@@ -34,7 +34,7 @@ class ModalDialog(tk.Toplevel):
     ) -> None:
         super().__init__(parent)
         self.title(title)
-        if isinstance(parent, (tk.Tk, tk.Toplevel, tk.Wm)):
+        if isinstance(parent, tk.Tk | tk.Toplevel | tk.Wm):
             self.transient(parent)
         self.resizable(True, True)
         self._on_ok = on_ok

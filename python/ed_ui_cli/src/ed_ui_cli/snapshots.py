@@ -219,8 +219,10 @@ def render_generic_table(target_name: str, payload: dict[str, Any]) -> Renderabl
             tables.append(t)
 
     if tables:
-        return tables[0] if len(tables) == 1 else Panel.fit(
-            "\n".join(str(t) for t in tables), title=target_name
+        return (
+            tables[0]
+            if len(tables) == 1
+            else Panel.fit("\n".join(str(t) for t in tables), title=target_name)
         )
 
     # Simple key-value fallback
@@ -228,7 +230,7 @@ def render_generic_table(target_name: str, payload: dict[str, Any]) -> Renderabl
     table.add_column("Field", style="cyan")
     table.add_column("Value", style="white")
     for k, v in payload.items():
-        if isinstance(v, (dict, list)):
+        if isinstance(v, dict | list):
             table.add_row(k, json.dumps(v, default=str))
         else:
             table.add_row(k, str(v))

@@ -7,7 +7,7 @@ from typing import Any
 
 from rich.console import Console, RenderableType
 
-from ed_ui_cli.components import render_connection_pill, render_metric_grid
+from ed_ui_cli.components import render_metric_grid
 from ed_ui_cli.snapshots import SnapshotTarget, render_snapshot_tables
 
 

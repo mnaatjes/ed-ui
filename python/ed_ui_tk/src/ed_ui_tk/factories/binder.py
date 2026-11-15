@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import tkinter as tk
 from collections.abc import Callable
-from typing import Any
 
 from ed_ui_core.domain.models import TelemetryViewState
+
 from ed_ui_tk.component_sets.legacy_edmc.telemetry import KeyValueGrid, StatusBar
 
 
@@ -42,7 +42,8 @@ class TkTelemetryBinder:
         """Subscribe to an external telemetry publisher and bind updates to the UI.
 
         Args:
-            subscribe_fn: A function taking a listener callback and returning an unsubscribe callable.
+            subscribe_fn: A function taking a listener callback and returning
+                an unsubscribe callable.
 
         Returns:
             A parameterless unsubscribe callback.

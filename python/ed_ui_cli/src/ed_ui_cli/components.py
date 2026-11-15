@@ -59,7 +59,7 @@ def render_metric_grid(
             if isinstance(val, bool):
                 val_style = "bold green" if val else "bold red"
                 cell.append(str(val), style=val_style)
-            elif isinstance(val, (int, float)):
+            elif isinstance(val, int | float):
                 cell.append(str(val), style="bold yellow")
             else:
                 cell.append(str(val), style="bold white")
@@ -99,7 +99,7 @@ def render_key_value_table(
     table.add_column(val_header, style="white")
 
     for k, v in data.items():
-        if isinstance(v, (dict, list)):
+        if isinstance(v, dict | list):
             table.add_row(k, json.dumps(v, default=str))
         else:
             table.add_row(k, str(v))

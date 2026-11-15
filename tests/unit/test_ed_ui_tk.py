@@ -1,8 +1,8 @@
 """Unit and behavioral tests for ed_ui_tk composition roots and legacy_edmc component set."""
 
 import tkinter as tk
-import pytest
 
+import pytest
 from ed_ui_core.domain.models import TelemetryRow, TelemetryViewState, ThemeMode
 from ed_ui_tk.component_sets.legacy_edmc.shell import AppShell
 from ed_ui_tk.component_sets.legacy_edmc.telemetry import KeyValueGrid, StatusBar
@@ -54,7 +54,11 @@ def test_composition_root_factories(tk_root):
     unsubscribed = False
 
     def dummy_subscriber(callback):
-        callback(TelemetryViewState(rows=[TelemetryRow(key="sys", label="System", value="Sol")], status_text="Active"))
+        callback(
+            TelemetryViewState(
+                rows=[TelemetryRow(key="sys", label="System", value="Sol")], status_text="Active"
+            )
+        )
 
         def _unsub():
             nonlocal unsubscribed

@@ -17,14 +17,14 @@ related_rfcs: []
 
 ## 1. System Overview & The Skeptic Test
 
-The `ed-ui` monorepo establishes a unified presentation tier for the Elite Dangerous fleet tools. Currently, presentation components reside in the `ed-integration-smoke` repository inside exploratory packages `src/ed_gui_core` and `src/ed_cli_core`. 
+The `ed-ui` monorepo establishes a unified presentation tier for the Elite Dangerous fleet tools. Currently, presentation components reside in the `ed-integration-smoke` repository inside exploratory packages `src/ed_gui_core` and `src/ed_cli_core`.
 
 These components are fragmented:
 1. `src/ed_gui_core` bundles UI-agnostic presentation models, Tkinter widgets, and application window shells into a single package without enforcement boundaries.
 2. `src/ed_cli_core` bundles Rich widgets, Textual apps, and CLI command options in one flat structure.
 3. Neither package implements standardized composition roots, lifecycle unsubscription, or thread-marshaling invariants.
 
-Migrating these components into `ed-ui` without an explicit architectural design would replicate existing technical debt and risk framework leakage across package boundaries. 
+Migrating these components into `ed-ui` without an explicit architectural design would replicate existing technical debt and risk framework leakage across package boundaries.
 
 This design document specifies:
 - The exact package and directory decomposition of legacy components into `python/ed_ui_core`, `python/ed_ui_tk`, and `python/ed_ui_cli`.
@@ -95,7 +95,7 @@ sequenceDiagram
 
     Caller->>Binder: bind_telemetry(source)
     Binder->>Source: subscribe(on_snapshot)
-    
+
     Source-->>Binder: TelemetrySnapshot (Background Thread)
     Binder->>Shell: root.after(0, update_ui, snapshot)
     Note over Shell,Grid: Marshaled safely to Tk main loop thread
