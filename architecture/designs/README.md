@@ -1,0 +1,14 @@
+---
+title: "Software Design Documents (SDD) Index"
+tags: ["sdd", "designs", "architecture"]
+created_at: "2026-11-15"
+last_updated_at: "2026-11-15"
+---
+
+# Software Design Documents (SDD) Index
+
+Governed by IEEE 1016-2009 Software Design Descriptions and the Unified Process Elaboration discipline.
+
+## Catalog
+
+- [SDD-001: Quality Gates and Boundary Enforcement Infrastructure](0001_quality_gates_and_boundary_enforcement.md) - **Approved** (2026-11-15)

@@ -12,3 +12,4 @@ This directory hosts the sequential, immutable Architectural Decision Records go
 ## Decision Log
 
 - [ADR 0001: `ed-ui` Monorepo Architecture and Component-Driven Multi-Package Distribution](0001_ed_ui_monorepo_architecture.md) - **Accepted** (2026-11-15)
+- [ADR 0002: Quality Gates and Automated Scope & Boundary Enforcement Architecture](0002_quality_gates_and_boundary_enforcement.md) - **Proposed** (2026-11-15)
