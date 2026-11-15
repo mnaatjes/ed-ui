@@ -84,7 +84,7 @@ class TailLineFormatter:
                 for k, v in event.payload.items():
                     if k in ("event", "timestamp", "payload_json", "raw_payload", "created_at"):
                         continue
-                    if isinstance(v, (str, int, float, bool)) or v is None:
+                    if isinstance(v, str | int | float | bool) or v is None:
                         val_str = str(v)
                         if len(val_str) > 30:
                             val_str = f"...{val_str[-27:]}"
