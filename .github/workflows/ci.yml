@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-gates:
+    name: Python Quality Gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: uv sync --all-packages
+
+      - name: Ruff Lint and Format Check
+        run: |
+          uv run ruff check python/ tests/
+          uv run ruff format --check python/ tests/
+
+      - name: Architectural Boundary Compliance Gates
+        run: uv run pytest tests/architecture/
+
+      - name: MyPy Static Type Check
+        run: uv run mypy python/
+
+      - name: Unit Test Suite
+        run: uv run pytest tests/unit/
+
+  web-gates:
+    name: Web Quality Gates
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/ed-ui-vue
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: web/ed-ui-vue/package.json
+
+      - name: Install web dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Build web component library
+        run: pnpm run build
