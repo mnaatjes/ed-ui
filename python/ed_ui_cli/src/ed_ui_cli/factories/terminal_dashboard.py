@@ -3,12 +3,17 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from rich.console import Console, RenderableType
 
 from ed_ui_cli.components import render_metric_grid
 from ed_ui_cli.snapshots import SnapshotTarget, render_snapshot_tables
+
+if TYPE_CHECKING:
+    from ed_ui_cli.dashboard import SingleScreenDashboard
+    from ed_ui_cli.diagnostics import DiagnosticReporter
+    from ed_ui_cli.tail import TailLineFormatter
 
 
 class TerminalDashboardBinder:
@@ -66,6 +71,33 @@ def create_terminal_dashboard(
     c = console or Console()
     binder = TerminalDashboardBinder(console=c)
     return c, binder
+
+
+def create_single_screen_dashboard(
+    title: str = "Elite Dangerous Telemetry Live Monitor",
+    console: Console | None = None,
+) -> SingleScreenDashboard:
+    """Factory function composing a SingleScreenDashboard."""
+    from ed_ui_cli.dashboard import SingleScreenDashboard
+
+    return SingleScreenDashboard(title=title, console=console)
+
+
+def create_diagnostic_reporter(console: Console | None = None) -> DiagnosticReporter:
+    """Factory function composing a DiagnosticReporter."""
+    from ed_ui_cli.diagnostics import DiagnosticReporter
+
+    return DiagnosticReporter(console=console)
+
+
+def create_tail_formatter(
+    console: Console | None = None,
+    expand_json: bool = False,
+) -> TailLineFormatter:
+    """Factory function composing a TailLineFormatter."""
+    from ed_ui_cli.tail import TailLineFormatter
+
+    return TailLineFormatter(console=console, expand_json=expand_json)
 
 
 def make_snapshot_views(
