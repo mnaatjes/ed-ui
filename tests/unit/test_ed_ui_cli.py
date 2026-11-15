@@ -55,3 +55,39 @@ def test_make_snapshot_views():
         SnapshotTarget.CARGO, '{"Inventory": [{"Name": "gold", "Count": 10}]}'
     )
     assert len(views) > 0
+
+
+def test_cli_harness_factories():
+    from ed_ui_cli.dashboard import SingleScreenDashboard
+    from ed_ui_cli.diagnostics import DiagnosticCheckResult, DiagnosticReporter
+    from ed_ui_cli.factories.terminal_dashboard import (
+        create_diagnostic_reporter,
+        create_single_screen_dashboard,
+        create_tail_formatter,
+    )
+    from ed_ui_cli.factories.tui_app import TuiTelemetryBinder, create_telemetry_tui_app
+    from ed_ui_cli.tail import TailLineFormatter
+    from ed_ui_cli.tui.app import BaseTelemetryTUIApp
+
+    dash = create_single_screen_dashboard(title="TestMonitor")
+    assert isinstance(dash, SingleScreenDashboard)
+
+    reporter = create_diagnostic_reporter()
+    assert isinstance(reporter, DiagnosticReporter)
+    reporter.report_live(
+        DiagnosticCheckResult(
+            name="test",
+            endpoint="/api",
+            passed=True,
+            latency_ms=1.5,
+        )
+    )
+    assert len(reporter.results) == 1
+
+    formatter = create_tail_formatter()
+    assert isinstance(formatter, TailLineFormatter)
+
+    app, binder = create_telemetry_tui_app()
+    assert isinstance(app, BaseTelemetryTUIApp)
+    assert isinstance(binder, TuiTelemetryBinder)
+    assert not binder.is_bound

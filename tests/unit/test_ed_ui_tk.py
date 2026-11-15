@@ -46,9 +46,11 @@ def test_key_value_grid_and_status(tk_root):
 
 
 def test_composition_root_factories(tk_root):
-    shell, binder = create_edmc_shell(master=tk_root, title="TestShell")
+    shell, binder, bridge, registry = create_edmc_shell(master=tk_root, title="TestShell")
     assert isinstance(shell, AppShell)
     assert isinstance(binder, TkTelemetryBinder)
+    assert bridge is not None
+    assert registry is not None
     assert not binder.is_bound
 
     unsubscribed = False
@@ -87,6 +89,8 @@ def test_composition_root_factories(tk_root):
 
 
 def test_make_edmc_telemetry_window_alias(tk_root):
-    shell, binder = make_edmc_telemetry_window(master=tk_root, title="AliasTest")
+    shell, binder, bridge, registry = make_edmc_telemetry_window(master=tk_root, title="AliasTest")
     assert isinstance(shell, AppShell)
     assert isinstance(binder, TkTelemetryBinder)
+    assert bridge is not None
+    assert registry is not None

@@ -1,5 +1,10 @@
 """legacy_edmc component set exports."""
 
+from ed_ui_tk.component_sets.legacy_edmc.bridge import (
+    PluginSettingsRegistry,
+    PluginSlot,
+    TkEventBridge,
+)
 from ed_ui_tk.component_sets.legacy_edmc.settings import (
     EntryWithContextMenu,
     ScrollableNotebook,
@@ -35,9 +40,12 @@ __all__ = [
     "KeyValueGrid",
     "MenuBar",
     "ModalDialog",
+    "PluginSettingsRegistry",
+    "PluginSlot",
     "ScrollableNotebook",
     "SettingsTab",
     "StatusBar",
+    "TkEventBridge",
     "ThemeManager",
     "ThemedButton",
     "ThemedCheckbutton",
