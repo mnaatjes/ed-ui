@@ -1,0 +1,13 @@
+[project]
+name = "ed-ui-tk"
+version = "0.1.0"
+description = "Component-driven Tkinter widgets, legacy EDMC components, and theme managers for Elite Dangerous"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ed-ui-core",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

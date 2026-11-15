@@ -1,0 +1,14 @@
+[project]
+name = "ed-ui-cli"
+version = "0.1.0"
+description = "Component-driven Rich and Textual terminal widgets, telemetry tables, and meters for Elite Dangerous"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ed-ui-core",
+    "rich>=13.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

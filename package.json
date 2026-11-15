@@ -1,0 +1,9 @@
+{
+  "name": "ed-ui-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monorepo workspace for Elite Dangerous presentation and web component packages",
+  "workspaces": [
+    "web/*"
+  ]
+}
