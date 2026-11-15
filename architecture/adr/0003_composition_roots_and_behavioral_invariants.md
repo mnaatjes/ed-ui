@@ -81,13 +81,53 @@ Within every deployable package, composition roots are strictly restricted to de
 | Package | Composition Root Location | Exports via `__init__.py` | Forbidden Inside |
 | :--- | :--- | :--- | :--- |
 | **`ed_ui_core`** | *None* (Hexagonal Core) | Domain view-models & tokens only | No factories or framework wiring |
-| **`ed_ui_tk`** | `src/ed_ui_tk/factories/` | `create_edmc_shell`, `bind_telemetry_client` | Forbidden in `components/`, `themes/` |
+| **`ed_ui_tk`** | `src/ed_ui_tk/factories/` | `create_edmc_shell`, `create_cockpit_hud_shell`, `bind_telemetry_client` | Forbidden in `component_sets/`, `themes/` |
 | **`ed_ui_cli`** | `src/ed_ui_cli/factories/` | `create_terminal_dashboard`, `run_diagnostic_suite` | Forbidden in `components/` |
 | **`@ed-fleet/vue`** | `src/composables/` | `useTelemetryStream`, `install` plugin | Forbidden in SFC `<template>` / components |
 
 ---
 
-### 2.3 Automated Architectural Enforcement
+### 2.3 Pluggable Component Set Architecture & Factory Plurality
+
+To support distinct visual design paradigms within a single framework package (e.g. classic EDMC plugin UI vs. modern glass cockpit HUD vs. native ttk widgets in `ed_ui_tk`), presentation packages organize rendering elements into **Pluggable Component Sets** governed by two consumption layers:
+
+1. **Pluggable Directory Taxonomy (`component_sets/`):**
+   ```text
+   python/ed_ui_tk/src/ed_ui_tk/
+   ├── component_sets/
+   │   ├── legacy_edmc/            # Component Set A: Classic EDMC plugin key-value grids & status bars
+   │   │   ├── status_bar.py
+   │   │   ├── key_value_grid.py
+   │   │   └── settings_dialog.py
+   │   │
+   │   ├── modern_hud/             # Component Set B: Rich Canvas-based HUD gauges & vector compasses
+   │   │   ├── pip_arc_gauge.py
+   │   │   ├── vector_compass.py
+   │   │   └── annunciator_matrix.py
+   │   │
+   │   └── ttk_standard/           # Component Set C: Standard native OS themed controls
+   │       ├── cargo_table.py
+   │       └── route_tree.py
+   │
+   ├── themes/                     # Shared Tkinter style & color palette managers
+   │   ├── edmc_theme.py           # Dark / Light / Transparent EDMC themes
+   │   └── orange_hud_theme.py     # Authentic Elite Dangerous amber glow
+   │
+   └── factories/                  # Composition Roots
+       ├── edmc_shell.py           # Specialized root: wires legacy_edmc component set
+       ├── cockpit_hud.py          # Specialized root: wires modern_hud component set
+       └── binder.py               # Generic binder: inspects and wires ANY component set
+   ```
+
+2. **Specialized Factory Roots vs. Generic Binder Roots:**
+   - **Specialized Assemblies:** Pre-wire complete turnkey assemblies for specific component sets:
+     - `create_edmc_shell(parent, client, ...)`: Composes classic `legacy_edmc` plugin frames.
+     - `create_cockpit_hud_shell(parent, client, ...)`: Composes modern canvas-driven glass cockpit HUDs.
+   - **Generic Auto-Binder (`bind_telemetry_client`):** Accepts an arbitrary widget tree containing widgets from *any* component set (or user-authored custom widgets adhering to display protocols). It traverses the widget hierarchy, hooks into `ed-fleet-client` event types, and automates thread marshaling and unsubscription.
+
+---
+
+### 2.4 Automated Architectural Enforcement
 
 Compliance with these invariants is verified deterministically through the automated quality gate pipeline established in ADR 0002:
 
