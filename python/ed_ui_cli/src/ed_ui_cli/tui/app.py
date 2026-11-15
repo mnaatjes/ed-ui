@@ -39,7 +39,7 @@ class MetricCardWidget(Static):
             if isinstance(v, bool):
                 style = "bold green" if v else "bold red"
                 t.append(f"{v}\n", style=style)
-            elif isinstance(v, (int, float)):
+            elif isinstance(v, int | float):
                 t.append(f"{v}\n", style="bold yellow")
             else:
                 t.append(f"{v}\n", style="bold white")
