@@ -1,6 +1,6 @@
 [project]
 name = "ed-ui-tk"
-version = "0.1.0"
+version = "0.2.0"
 description = "Component-driven Tkinter widgets, legacy EDMC components, and theme managers for Elite Dangerous"
 readme = "README.md"
 requires-python = ">=3.13"
