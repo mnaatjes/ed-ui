@@ -1,6 +1,6 @@
 [project]
 name = "ed-ui-core"
-version = "0.2.0"
+version = "0.3.0"
 description = "Pure hexagonal domain display models, formatting utilities, and color design tokens for Elite Dangerous UI components"
 readme = "README.md"
 requires-python = ">=3.13"

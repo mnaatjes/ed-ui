@@ -1,6 +1,6 @@
 # `ed-ui`
 
-[![Version: 0.2.0](https://img.shields.io/badge/version-0.2.0-blue.svg)](CHANGELOG.md)
+[![Version: 0.3.0](https://img.shields.io/badge/version-0.3.0-blue.svg)](CHANGELOG.md)
 
 Multi-package monorepo for Elite Dangerous presentation and UI component libraries across Terminal (Rich/Textual), Desktop GUI (Tkinter/EDMC), and Web (Vue 3 / TypeScript).
 
