@@ -10,7 +10,9 @@ from ed_ui_cli.factories.terminal_dashboard import (
 )
 from ed_ui_cli.factories.tui_app import (
     TuiTelemetryBinder,
+    create_telemetry_console_app,
     create_telemetry_tui_app,
+    make_telemetry_console_app,
     make_telemetry_tui_app,
 )
 
@@ -20,8 +22,10 @@ __all__ = [
     "create_diagnostic_reporter",
     "create_single_screen_dashboard",
     "create_tail_formatter",
+    "create_telemetry_console_app",
     "create_telemetry_tui_app",
     "create_terminal_dashboard",
     "make_snapshot_views",
+    "make_telemetry_console_app",
     "make_telemetry_tui_app",
 ]
