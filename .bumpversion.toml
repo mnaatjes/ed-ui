@@ -37,6 +37,18 @@ search = "[Version: {current_version}]"
 replace = "[Version: {new_version}]"
 
 [[tool.bumpversion.files]]
+filename = "python/ed_ui_core/src/ed_ui_core/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "python/ed_ui_tk/src/ed_ui_tk/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "python/ed_ui_cli/src/ed_ui_cli/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "tests/unit/test_baseline.py"
+
+[[tool.bumpversion.files]]
 filename = "CHANGELOG.md"
 search = "## [Unreleased]"
 replace = "## [Unreleased]\n\n## [{new_version}] - {now:%Y-%m-%d}"
