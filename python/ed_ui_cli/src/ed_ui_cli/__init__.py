@@ -2,4 +2,24 @@
 
 from __future__ import annotations
 
-__version__ = "0.1.0"
+from .themes import (
+    CASSETTE_FUTURISM_THEME,
+    DEFAULT_THEME,
+    PHOSPHOR_GREEN_THEME,
+    UiTheme,
+    get_theme,
+    list_themes,
+    register_theme,
+)
+
+__version__ = "0.2.0"
+
+__all__ = [
+    "CASSETTE_FUTURISM_THEME",
+    "DEFAULT_THEME",
+    "PHOSPHOR_GREEN_THEME",
+    "UiTheme",
+    "get_theme",
+    "list_themes",
+    "register_theme",
+]

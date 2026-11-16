@@ -77,18 +77,21 @@ def create_telemetry_tui_app(
     title: str = "Elite Dangerous Telemetry",
     host: str = "localhost",
     port: int = 8080,
+    theme: str | Any | None = None,
 ) -> tuple[BaseTelemetryTUIApp, TuiTelemetryBinder]:
     """Factory function composing a BaseTelemetryTUIApp and its TuiTelemetryBinder.
 
-    Invariants enforced (ADR 0003):
+    Invariants enforced (ADR 0003 & ADR 0005):
     1. Factory function prefix: 'create_'
     2. Returns a configured binder with symmetric unbind capabilities.
     3. Thread marshaling to Textual loop via call_from_thread.
+    4. Configurable theme (default, cassette_futurism, phosphor_green).
     """
     app = BaseTelemetryTUIApp(
         title=title,
         host=host,
         port=port,
+        theme=theme,
     )
     binder = TuiTelemetryBinder(app=app)
     return app, binder
@@ -98,12 +101,14 @@ def make_telemetry_tui_app(
     title: str = "Elite Dangerous Telemetry",
     host: str = "localhost",
     port: int = 8080,
+    theme: str | Any | None = None,
 ) -> tuple[BaseTelemetryTUIApp, TuiTelemetryBinder]:
     """Alias adhering to ADR 0003 'make_' factory naming standard."""
     return create_telemetry_tui_app(
         title=title,
         host=host,
         port=port,
+        theme=theme,
     )
 
 
@@ -111,18 +116,21 @@ def create_telemetry_console_app(
     title: str = "Elite Dangerous Telemetry Station",
     host: str = "192.168.1.214",
     port: int = 8080,
+    theme: str | Any | None = None,
 ) -> tuple[TelemetryConsoleApp, TuiTelemetryBinder]:
     """Factory function composing a TelemetryConsoleApp with interactive components and binder.
 
-    Invariants enforced (ADR 0003 & ADR 0004):
+    Invariants enforced (ADR 0003, ADR 0004 & ADR 0005):
     1. Factory function prefix: 'create_'
     2. Returns configured binder for safe asynchronous thread marshaling.
     3. Mounts interactive DataTable, Tree, Switch, and Cockpit controls.
+    4. Configurable theme (default, cassette_futurism, phosphor_green).
     """
     app = TelemetryConsoleApp(
         title=title,
         host=host,
         port=port,
+        theme=theme,
     )
     binder = TuiTelemetryBinder(app=app)
     return app, binder
@@ -132,10 +140,12 @@ def make_telemetry_console_app(
     title: str = "Elite Dangerous Telemetry Station",
     host: str = "192.168.1.214",
     port: int = 8080,
+    theme: str | Any | None = None,
 ) -> tuple[TelemetryConsoleApp, TuiTelemetryBinder]:
     """Alias adhering to ADR 0003 'make_' factory naming standard."""
     return create_telemetry_console_app(
         title=title,
         host=host,
         port=port,
+        theme=theme,
     )

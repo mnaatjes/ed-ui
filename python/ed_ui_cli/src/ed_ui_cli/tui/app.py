@@ -11,6 +11,7 @@ from textual.containers import Container, Horizontal, Vertical, VerticalScroll
 from textual.widgets import Footer, Header, Label, RichLog, Static, TabbedContent, TabPane
 
 from ..components import render_connection_pill
+from ..themes import UiTheme, get_theme
 from .components.controls import CockpitButton, FilterCheckbox, RadioSelector, SystemSwitch
 from .components.fuzzy import FuzzySearchInput, TelemetryCommandProvider
 from .components.table import TelemetryDataTable
@@ -100,11 +101,13 @@ class BaseTelemetryTUIApp(App[None]):
         title: str = "Elite Dangerous Telemetry Live Monitor",
         host: str = "192.168.1.214",
         port: int = 8080,
+        theme: str | UiTheme | None = None,
     ) -> None:
         super().__init__()
         self.title = title
         self.server_host = host
         self.server_port = port
+        self.ui_theme: UiTheme = theme if isinstance(theme, UiTheme) else get_theme(theme)
         self.is_connected = False
         self.is_paused = False
 
@@ -129,7 +132,9 @@ class BaseTelemetryTUIApp(App[None]):
         yield Footer()
 
     def on_mount(self) -> None:
-        """Initialize connection pill upon application mount."""
+        """Initialize connection pill and register theme upon application mount."""
+        self.register_theme(self.ui_theme.to_textual_theme())
+        self.theme = self.ui_theme.name
         self.update_connection_status(is_connected=False)
 
     def update_connection_status(self, is_connected: bool, latency_ms: float | None = None) -> None:
@@ -203,8 +208,9 @@ class TelemetryConsoleApp(BaseTelemetryTUIApp):
         title: str = "Elite Dangerous Telemetry Station",
         host: str = "192.168.1.214",
         port: int = 8080,
+        theme: str | UiTheme | None = None,
     ) -> None:
-        super().__init__(title=title, host=host, port=port)
+        super().__init__(title=title, host=host, port=port, theme=theme)
         self.fuzzy_search = FuzzySearchInput(
             placeholder="Search systems, events, stations...",
             id="global-search",
