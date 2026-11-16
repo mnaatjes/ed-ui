@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from typing import Any
 
-from ed_ui_cli.tui.app import BaseTelemetryTUIApp
+from ed_ui_cli.tui.app import BaseTelemetryTUIApp, TelemetryConsoleApp
 
 
 class TuiTelemetryBinder:
@@ -101,6 +101,40 @@ def make_telemetry_tui_app(
 ) -> tuple[BaseTelemetryTUIApp, TuiTelemetryBinder]:
     """Alias adhering to ADR 0003 'make_' factory naming standard."""
     return create_telemetry_tui_app(
+        title=title,
+        host=host,
+        port=port,
+    )
+
+
+def create_telemetry_console_app(
+    title: str = "Elite Dangerous Telemetry Station",
+    host: str = "192.168.1.214",
+    port: int = 8080,
+) -> tuple[TelemetryConsoleApp, TuiTelemetryBinder]:
+    """Factory function composing a TelemetryConsoleApp with interactive components and binder.
+
+    Invariants enforced (ADR 0003 & ADR 0004):
+    1. Factory function prefix: 'create_'
+    2. Returns configured binder for safe asynchronous thread marshaling.
+    3. Mounts interactive DataTable, Tree, Switch, and Cockpit controls.
+    """
+    app = TelemetryConsoleApp(
+        title=title,
+        host=host,
+        port=port,
+    )
+    binder = TuiTelemetryBinder(app=app)
+    return app, binder
+
+
+def make_telemetry_console_app(
+    title: str = "Elite Dangerous Telemetry Station",
+    host: str = "192.168.1.214",
+    port: int = 8080,
+) -> tuple[TelemetryConsoleApp, TuiTelemetryBinder]:
+    """Alias adhering to ADR 0003 'make_' factory naming standard."""
+    return create_telemetry_console_app(
         title=title,
         host=host,
         port=port,

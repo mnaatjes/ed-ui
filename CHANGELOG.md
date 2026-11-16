@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Interactive TUI Component Library (`ADR 0004`, `SDD-004`):**
+  - Added `FuzzySearchInput` providing search-as-you-type filtering with inline dynamic dropdowns and `TelemetryCommandProvider` for Textual `Ctrl+P` command palette.
+  - Added `TelemetryDataTable` with virtualized bidirectional ($X$ and $Y$ axis) scrolling, pinned header rows, and reactive row selection.
+  - Added `TelemetryTree` and `JsonInspectorTree` supporting accordion collapsible nodes for star-system cartography, recursive JSON DTO payload inspection, and directory topologies.
+  - Added `SystemSwitch` immediate sliding hardware/stream toggle, `CockpitButton` semantic action button, `RadioSelector` mutually exclusive mode group, and `FilterCheckbox` topic filter.
+  - Added `TelemetryConsoleApp` multi-pane reactive application shell in `ed_ui_cli.tui.app`.
+  - Added composition root factories `create_telemetry_console_app` and `make_telemetry_console_app` in `ed_ui_cli.factories`.
+  - Added async unit tests in `tests/unit/test_tui_interactive_components.py` with Textual headless `run_test` verification.
+
 ## [0.1.0] - 2026-11-15
 
 ### Added
