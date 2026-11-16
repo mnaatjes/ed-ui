@@ -36,17 +36,19 @@ class UiTheme:
 
     def to_rich_theme(self) -> RichTheme:
         """Convert design tokens to a Rich console Theme."""
-        return RichTheme({
-            "ui.primary": self.primary,
-            "ui.secondary": self.secondary,
-            "ui.surface": self.surface,
-            "ui.panel": self.panel,
-            "ui.accent": self.accent,
-            "ui.success": self.success,
-            "ui.warning": self.warning,
-            "ui.error": self.error,
-            "ui.muted": self.muted,
-        })
+        return RichTheme(
+            {
+                "ui.primary": self.primary,
+                "ui.secondary": self.secondary,
+                "ui.surface": self.surface,
+                "ui.panel": self.panel,
+                "ui.accent": self.accent,
+                "ui.success": self.success,
+                "ui.warning": self.warning,
+                "ui.error": self.error,
+                "ui.muted": self.muted,
+            }
+        )
 
     def to_textual_theme(self) -> TextualTheme:
         """Convert design tokens to a Textual Theme."""
